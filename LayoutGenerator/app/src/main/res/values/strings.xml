@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">LayoutGenerator</string>
+    <string-array name="dimension">
+        <item>match_parent</item>
+        <item>wrap_content</item>
+        <item>Custom</item>
+    </string-array>
+
+    <string-array name="gravityselector">
+        <item>bottom</item>
+        <item>center</item>
+        <item>center_horizontal</item>
+        <item>center_vertical</item>
+        <item>clip_horizontal</item>
+        <item>clip_horizontal</item>
+        <item>end</item>
+        <item>left</item>
+        <item>right</item>
+        <item>start</item>
+        <item>top</item>
+        <item>fill_horizontal</item>
+        <item>fill_vertical</item>
+        <item>fill</item>
+    </string-array>
+
+    <string-array name="widgetselector">
+        <item>TextView</item>
+        <item>EditText</item>
+        <item>Button</item>
+        <item>Spinner</item>
+        <item>RatingBar</item>
+        </string-array>
+</resources>
