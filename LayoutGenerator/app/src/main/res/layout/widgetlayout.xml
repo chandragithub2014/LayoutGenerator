@@ -10,11 +10,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="16dp">
+            android:layout_margin="16dp"
+            >
           <EditText
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="Screen Width"
+
               android:id="@+id/width"/>
 
             <TextView
@@ -67,6 +69,11 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter Custom Height"
                 android:id="@+id/custom_height"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/label"
+                android:hint="Widget Name"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

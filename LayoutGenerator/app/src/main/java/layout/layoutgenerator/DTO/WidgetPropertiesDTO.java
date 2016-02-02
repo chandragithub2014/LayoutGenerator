@@ -12,6 +12,7 @@ public class WidgetPropertiesDTO {
     String margin;
     String gravity;
     String widgetId;
+    String widgetLabel;
     public String getWidgetName() {
         return widgetName;
     }
@@ -66,5 +67,13 @@ public class WidgetPropertiesDTO {
 
     public void setWidgetId(String widgetId) {
         this.widgetId = widgetId;
+    }
+
+    public String getWidgetLabel() {
+        return widgetLabel;
+    }
+
+    public void setWidgetLabel(String widgetLabel) {
+        this.widgetLabel = widgetLabel;
     }
 }
