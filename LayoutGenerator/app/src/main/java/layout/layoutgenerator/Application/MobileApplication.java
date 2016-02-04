@@ -18,6 +18,8 @@ public class MobileApplication extends Application {
     private Activity activity;
     private int screenWidth;
     List<WidgetPropertiesDTO> widgetList = new ArrayList<WidgetPropertiesDTO>();
+    private int widgetPos;
+    HashMap<Integer ,WidgetPropertiesDTO> widgetInfoMap  = new HashMap<Integer ,WidgetPropertiesDTO>();
 
     @Override
     public void onCreate() {
@@ -51,5 +53,21 @@ public class MobileApplication extends Application {
 
     public void setWidgetList(List<WidgetPropertiesDTO> widgetList) {
         this.widgetList = widgetList;
+    }
+
+    public int getWidgetPos() {
+        return widgetPos;
+    }
+
+    public void setWidgetPos(int widgetPos) {
+        this.widgetPos = widgetPos;
+    }
+
+    public HashMap<Integer, WidgetPropertiesDTO> getWidgetInfoMap() {
+        return widgetInfoMap;
+    }
+
+    public void setWidgetInfoMap(HashMap<Integer, WidgetPropertiesDTO> widgetInfoMap) {
+        this.widgetInfoMap = widgetInfoMap;
     }
 }

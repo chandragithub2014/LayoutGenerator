@@ -1,0 +1,34 @@
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="layout.layoutgenerator.fragments.ResultFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"
+        android:id = "@+id/resultView"
+        android:layout_margin="16dp"
+        android:typeface="normal"
+        android:textStyle="normal"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="20sp"/>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/email"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email XML"
+        ></Button>
+    </RelativeLayout>
+

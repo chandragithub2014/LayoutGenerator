@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import layout.layoutgenerator.Application.MobileApplication;
@@ -49,7 +51,8 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
          v  = inflater.inflate(R.layout.widgetlayout, container, false);
         widgetPropertiesDTO = new WidgetPropertiesDTO();
         initializeViews(v);
-        populateSpinnerDefaultValues();
+       checkAndPopulateWithDataForPosition();
+     //  populateSpinnerDefaultValues();
 
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -84,7 +87,72 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
         gravitySelector.setOnItemSelectedListener(this);
 
     }
+private void checkAndPopulateWithDataForPosition(){
+    int position = MobileApplication.getInstance().getWidgetPos();
+    Log.d("ViewFragment","Position::::"+position);
+    position = position + 1;
+    Log.d("ViewFragment","Incremented Position::::"+position);
+    WidgetPropertiesDTO value = MobileApplication.getInstance().getWidgetInfoMap().get(position);
+    if(value!=null){
+        //Populate WidgetName
+        ArrayList<String> list=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.widgetselector)) );  // your array id of string resource
+        if(!TextUtils.isEmpty(value.getWidgetName())) {
+            int pos = list.indexOf(value.getWidgetName());
+            widgetSelector.setSelection(pos);
+        }
+        list=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.dimension)) );  // your array id of string resource
+        if(!TextUtils.isEmpty(value.getWidth())){
+            Log.d("ViewFragment","Width:::::"+value.getWidth());
+            if(!value.getWidth().equalsIgnoreCase("match_parent") || !value.getWidth().equalsIgnoreCase("wrap_content")){
+                String dimension = value.getWidth();
+                String alteredString = dimension.substring(0,dimension.length()-2);
+                customWidth.setText(alteredString);
+                int pos = list.indexOf("Custom");
+                widthSelector.setSelection(pos);
+            }else{
+                int pos = list.indexOf(value.getWidth());
+                widthSelector.setSelection(pos);
+            }
+        }
 
+        if(!TextUtils.isEmpty(value.getHeight())){
+            Log.d("ViewFragment","Height:::::"+value.getHeight());
+            if(!value.getHeight().equalsIgnoreCase("match_parent") || !value.getHeight().equalsIgnoreCase("wrap_content")){
+                String dimension = value.getHeight();
+                String alteredString = dimension.substring(0,dimension.length()-2);
+                customHeight.setText(alteredString);
+                int pos = list.indexOf("Custom");
+                heightSelector.setSelection(pos);
+            }else{
+                int pos = list.indexOf(value.getHeight());
+                heightSelector.setSelection(pos);
+            }
+        }
+
+        //Gravity
+        list=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.gravityselector)) );  // your array id of string resource
+        if(!TextUtils.isEmpty(value.getGravity())) {
+            int pos = list.indexOf(value.getGravity());
+            gravitySelector.setSelection(pos);
+        }
+        String padding = value.getPadding();
+        String alteredString = padding.substring(0, padding.length() - 2);
+        widgetPadding.setText(alteredString);
+
+        String margin = value.getMargin();
+        String alteredMarginString = margin.substring(0, margin.length() - 2);
+        widgetMargin.setText(alteredMarginString);
+
+        if(!TextUtils.isEmpty(value.getWidgetLabel())){
+            widgetLabel.setText(value.getWidgetLabel());
+        }
+
+
+    }else{
+        populateSpinnerDefaultValues();
+    }
+
+}
     private void populateSpinnerDefaultValues(){
         widgetPropertiesDTO.setWidgetName(widgetSelector.getItemAtPosition(0).toString());
         widgetPropertiesDTO.setWidth(widthSelector.getItemAtPosition(0).toString());
@@ -101,6 +169,8 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
                 try {
                     String generatedXML = XMLGenerator.getInstance().generateLayoutUsingXMLSerializer();
                     Log.d("ViewFragment", "GeneratedXML::::::"+generatedXML);
+                    getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(mContainerId,ResultFragment.newInstance(generatedXML,"")).commit();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -121,25 +191,26 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
                 widgetPropertiesDTO.setWidgetName( widgetSelector.getItemAtPosition(position).toString());
                 break;
             case R.id.width_selector:
+
                 if(position==2){
-                    if(!TextUtils.isEmpty(customWidth.getText().toString())){
+                  /*  if(!TextUtils.isEmpty(customWidth.getText().toString())){
                         widgetPropertiesDTO.setWidth(customWidth.getText().toString() + "dp");
                     }
                     else{
                         widgetPropertiesDTO.setWidth("50"+"dp");
-                    }
+                    }*/
                 }else {
                     widgetPropertiesDTO.setWidth(widthSelector.getItemAtPosition(position).toString());
                 }
                 break;
             case R.id.height_selector:
                 if(position==2){
-                    if(!TextUtils.isEmpty(customHeight.getText().toString())){
+                /*    if(!TextUtils.isEmpty(customHeight.getText().toString())){
                         widgetPropertiesDTO.setHeight(customHeight.getText().toString()+"dp");
                     }
                     else{
                         widgetPropertiesDTO.setHeight("50" + "dp");
-                    }
+                    }*/
                 }else {
                     widgetPropertiesDTO.setHeight(heightSelector.getItemAtPosition(position).toString());
                 }
@@ -164,6 +235,14 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
      //   calculateWidgetHeight();
         calculatePaddingAndMargin();
      //   calculateGravity();
+            if(!TextUtils.isEmpty(customWidth.getText().toString())){
+                widgetPropertiesDTO.setWidth(customWidth.getText().toString()+"dp");
+            }
+
+        if(!TextUtils.isEmpty(customHeight.getText().toString())){
+            widgetPropertiesDTO.setHeight(customHeight.getText().toString()+"dp");
+        }
+
 
         if(!TextUtils.isEmpty(widgetPropertiesDTO.getWidgetName())
                 && !TextUtils.isEmpty(widgetPropertiesDTO.getWidth())
@@ -179,14 +258,38 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
             }
             int viewID = UniqueIDGenerator.generateViewId();
             widgetPropertiesDTO.setWidgetId(""+widgetPropertiesDTO.getWidgetName()+viewID);
-            if(MobileApplication.getInstance().getWidgetList().size()>0){
+            int widgetPos = MobileApplication.getInstance().getWidgetPos();
+            widgetPos = widgetPos + 1;
+            MobileApplication.getInstance().setWidgetPos(widgetPos);
+/*            if(MobileApplication.getInstance().getWidgetList().size()>0){
                 List<WidgetPropertiesDTO> tempList = MobileApplication.getInstance().getWidgetList();
                 tempList.add(widgetPropertiesDTO);
                 MobileApplication.getInstance().setWidgetList(tempList);
-            }else{
+            }*/
+            if(MobileApplication.getInstance().getWidgetInfoMap()!=null && MobileApplication.getInstance().getWidgetInfoMap().size()>0){
+                WidgetPropertiesDTO value = MobileApplication.getInstance().getWidgetInfoMap().get(widgetPos);
+                if (value != null) {
+                    HashMap<Integer,WidgetPropertiesDTO> temp = MobileApplication.getInstance().getWidgetInfoMap();
+                    temp.put(widgetPos,widgetPropertiesDTO);
+                    MobileApplication.getInstance().setWidgetInfoMap(temp);
+                } else {
+                    // Key might be present...
+                    if (MobileApplication.getInstance().getWidgetInfoMap().containsKey(widgetPos)) {
+                        // Okay, there's a key but the value is null
+                    } else {
+                        // Definitely no such key
+                        HashMap<Integer,WidgetPropertiesDTO> temp = MobileApplication.getInstance().getWidgetInfoMap();
+                        temp.put(widgetPos,widgetPropertiesDTO);
+                        MobileApplication.getInstance().setWidgetInfoMap(temp);
+                    }
+                }
+            } else{
                 List<WidgetPropertiesDTO> tempList = new ArrayList<WidgetPropertiesDTO>();
-                tempList.add(widgetPropertiesDTO);
-                MobileApplication.getInstance().setWidgetList(tempList);
+                HashMap<Integer,WidgetPropertiesDTO> temp = new HashMap<Integer,WidgetPropertiesDTO>();
+                temp.put(widgetPos, widgetPropertiesDTO);
+                MobileApplication.getInstance().setWidgetInfoMap(temp);
+               /* tempList.add(widgetPropertiesDTO);
+                MobileApplication.getInstance().setWidgetList(tempList);*/
             }
         }
 

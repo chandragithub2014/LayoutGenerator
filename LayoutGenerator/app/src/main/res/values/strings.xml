@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">LayoutGenerator</string>
+    <string name="select_prompt">Select</string>
     <string-array name="dimension">
         <item>match_parent</item>
         <item>wrap_content</item>
@@ -29,5 +30,8 @@
         <item>Button</item>
         <item>Spinner</item>
         <item>RatingBar</item>
-        </string-array>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

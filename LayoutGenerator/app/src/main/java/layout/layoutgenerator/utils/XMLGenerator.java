@@ -7,7 +7,10 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import layout.layoutgenerator.Application.MobileApplication;
 import layout.layoutgenerator.DTO.WidgetPropertiesDTO;
@@ -93,10 +96,10 @@ public class XMLGenerator {
 
     }
 
-    private  XmlSerializer updateXMLSerializerWithWidgets(XmlSerializer xmlSerializer){
-       this.xmlSerializer = xmlSerializer;
+    private  XmlSerializer updateXMLSerializerWithWidgets1(XmlSerializer xmlSerializer){
+        this.xmlSerializer = xmlSerializer;
         try{
-           List<WidgetPropertiesDTO> widgetPropertiesDTOList = MobileApplication.getInstance().getWidgetList();
+            List<WidgetPropertiesDTO> widgetPropertiesDTOList = MobileApplication.getInstance().getWidgetList();
             if(widgetPropertiesDTOList.size()>0){
                 for(int i = 0;i<widgetPropertiesDTOList.size();i++){
                     WidgetPropertiesDTO temp = widgetPropertiesDTOList.get(i);
@@ -115,6 +118,36 @@ public class XMLGenerator {
                 }
 
             }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  xmlSerializer;
+    }
+
+
+    private  XmlSerializer updateXMLSerializerWithWidgets(XmlSerializer xmlSerializer){
+        this.xmlSerializer = xmlSerializer;
+        try{
+            HashMap<Integer,WidgetPropertiesDTO> widgetInfoMap = MobileApplication.getInstance().getWidgetInfoMap();
+            Map<Integer, WidgetPropertiesDTO> treeMap = new TreeMap<Integer, WidgetPropertiesDTO>(widgetInfoMap);
+            if(widgetInfoMap!=null && widgetInfoMap.size()>0){
+
+                for (Map.Entry<Integer, WidgetPropertiesDTO> entry : treeMap.entrySet())
+                {
+                    System.out.println(entry.getKey() + "/" + entry.getValue());
+                    WidgetPropertiesDTO temp = entry.getValue();
+                    xmlSerializer.startTag("", temp.getWidgetName());
+                    xmlSerializer.attribute("", "android:layout_width", temp.getWidth());
+                    xmlSerializer.attribute("", "android:layout_height", temp.getHeight());
+                    xmlSerializer.attribute("", "android:text", temp.getWidgetLabel());
+                    xmlSerializer.attribute("", "android:layout_margin", temp.getMargin());
+                    xmlSerializer.attribute("", "android:padding", temp.getPadding());
+                    xmlSerializer.attribute("", "android:gravity", temp.getGravity());
+                    xmlSerializer.attribute("", "android:id", "@+id/"+temp.getWidgetId());
+                    xmlSerializer.endTag("", temp.getWidgetName());
+                }
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -1,4 +1,3 @@
-<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,21 +9,21 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/a1"
+            android:id="@+id/TextView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:gravity="left"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="bottom"
             android:padding="5dp"
-            android:text="testtttttt" />
+            android:text="testtttt" />
 
         <EditText
-            android:id="@+id/a2"
+            android:id="@+id/EditText2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="right"
             android:padding="5dp"
-            android:text="edittexttttt" />
+            android:text="editttt" />
     </LinearLayout>
 </ScrollView>

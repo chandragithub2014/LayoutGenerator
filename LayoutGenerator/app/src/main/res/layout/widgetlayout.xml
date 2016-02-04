@@ -30,6 +30,7 @@
                 android:id="@+id/widget_selector"
                 android:drawSelectorOnTop="true"
                 android:entries="@array/widgetselector"
+                android:prompt="@string/select_prompt"
                 ></Spinner>
 
             <TextView
@@ -43,6 +44,7 @@
                   android:id="@+id/width_selector"
                   android:drawSelectorOnTop="true"
                   android:entries="@array/dimension"
+                  android:prompt="@string/select_prompt"
                   ></Spinner>
             <EditText
                 android:layout_width="match_parent"
@@ -63,6 +65,7 @@
                 android:id="@+id/height_selector"
                 android:drawSelectorOnTop="true"
                 android:entries="@array/dimension"
+                android:prompt="@string/select_prompt"
                 ></Spinner>
             <EditText
                 android:layout_width="match_parent"
