@@ -6,10 +6,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="layout.layoutgenerator.fragments.ResultFragment">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:layout_alignParentTop="true"
+        android:id="@+id/email_txt"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/email">
+        android:layout_below="@+id/email_txt"
+        android:layout_above="@+id/footer">
 
     <TextView
         android:layout_width="match_parent"
@@ -19,16 +26,30 @@
         android:layout_margin="16dp"
         android:typeface="normal"
         android:textStyle="normal"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="#0700fc"
         android:textSize="20sp"/>
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true">
     <Button
         android:id="@+id/email"
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Email XML"
         ></Button>
+    <Button
+        android:id="@+id/save"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="SaveLocal"
+        ></Button>
+    </LinearLayout>
     </RelativeLayout>
 

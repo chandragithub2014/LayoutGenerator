@@ -10,15 +10,15 @@
     <string-array name="gravityselector">
         <item>bottom</item>
         <item>center</item>
-        <item>center_horizontal</item>
-        <item>center_vertical</item>
-        <item>clip_horizontal</item>
-        <item>clip_horizontal</item>
         <item>end</item>
         <item>left</item>
         <item>right</item>
         <item>start</item>
         <item>top</item>
+        <item>center_horizontal</item>
+        <item>center_vertical</item>
+        <item>clip_horizontal</item>
+        <item>clip_horizontal</item>
         <item>fill_horizontal</item>
         <item>fill_vertical</item>
         <item>fill</item>
@@ -30,6 +30,26 @@
         <item>Button</item>
         <item>Spinner</item>
         <item>RatingBar</item>
+        <item>ImageButton</item>
+        <item>ImageView</item>
+        <item>RadioButton</item>
+        <item>CheckBox</item>
+    </string-array>
+
+    <string-array name="layoutselector">
+        <item>Vertical LinearLayout</item>
+        <item>Vertically Horizontal LinearLayout</item>
+
+    </string-array>
+
+    <string-array name="weightselector">
+        <item>0</item>
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+        <item>100</item>
+
+
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

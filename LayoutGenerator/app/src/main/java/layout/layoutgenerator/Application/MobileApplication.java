@@ -20,7 +20,11 @@ public class MobileApplication extends Application {
     List<WidgetPropertiesDTO> widgetList = new ArrayList<WidgetPropertiesDTO>();
     private int widgetPos;
     HashMap<Integer ,WidgetPropertiesDTO> widgetInfoMap  = new HashMap<Integer ,WidgetPropertiesDTO>();
-
+    private boolean isGeneratorFragment;
+    private boolean isHorizonVertGeneratorFragment;
+    private int rowPosition;
+   private HashMap<Integer,HashMap<Integer,WidgetPropertiesDTO>> rowHashMap = new  HashMap<Integer,HashMap<Integer,WidgetPropertiesDTO>>() ;
+   private boolean isBack;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -69,5 +73,46 @@ public class MobileApplication extends Application {
 
     public void setWidgetInfoMap(HashMap<Integer, WidgetPropertiesDTO> widgetInfoMap) {
         this.widgetInfoMap = widgetInfoMap;
+    }
+
+    public boolean isGeneratorFragment() {
+        return isGeneratorFragment;
+    }
+
+    public void setIsGeneratorFragment(boolean isGeneratorFragment) {
+        this.isGeneratorFragment = isGeneratorFragment;
+    }
+
+    public int getRowPosition() {
+        return rowPosition;
+    }
+
+    public void setRowPosition(int rowPosition) {
+        this.rowPosition = rowPosition;
+    }
+
+    public HashMap<Integer, HashMap<Integer, WidgetPropertiesDTO>> getRowHashMap() {
+        return rowHashMap;
+    }
+
+    public void setRowHashMap(HashMap<Integer, HashMap<Integer, WidgetPropertiesDTO>> rowHashMap) {
+        this.rowHashMap = rowHashMap;
+    }
+
+    public boolean isHorizonVertGeneratorFragment() {
+        return isHorizonVertGeneratorFragment;
+    }
+
+    public void setIsHorizonVertGeneratorFragment(boolean isHorizonVertGeneratorFragment) {
+        this.isHorizonVertGeneratorFragment = isHorizonVertGeneratorFragment;
+    }
+
+
+    public boolean isBack() {
+        return isBack;
+    }
+
+    public void setIsBack(boolean isBack) {
+        this.isBack = isBack;
     }
 }

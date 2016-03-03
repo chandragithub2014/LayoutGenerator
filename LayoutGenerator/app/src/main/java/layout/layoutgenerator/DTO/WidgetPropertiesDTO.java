@@ -13,6 +13,8 @@ public class WidgetPropertiesDTO {
     String gravity;
     String widgetId;
     String widgetLabel;
+    String widgetDrawable; //for ImageView,ImageButton
+    String widgetWeight;
     public String getWidgetName() {
         return widgetName;
     }
@@ -75,5 +77,21 @@ public class WidgetPropertiesDTO {
 
     public void setWidgetLabel(String widgetLabel) {
         this.widgetLabel = widgetLabel;
+    }
+
+    public String getWidgetDrawable() {
+        return widgetDrawable;
+    }
+
+    public void setWidgetDrawable(String widgetDrawable) {
+        this.widgetDrawable = widgetDrawable;
+    }
+
+    public String getWidgetWeight() {
+        return widgetWeight;
+    }
+
+    public void setWidgetWeight(String widgetWeight) {
+        this.widgetWeight = widgetWeight;
     }
 }

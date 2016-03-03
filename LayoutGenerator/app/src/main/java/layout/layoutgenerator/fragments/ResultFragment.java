@@ -1,25 +1,42 @@
 package layout.layoutgenerator.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.StringWriter;
+import java.util.jar.Manifest;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -31,9 +48,9 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import layout.layoutgenerator.MainActivity;
 import layout.layoutgenerator.R;
-
-
+import layout.layoutgenerator.preview.VerticalLinearLayoutActivity;
 
 
 /**
@@ -51,6 +68,9 @@ public class ResultFragment extends Fragment implements  View.OnClickListener {
     private String mParam1;
     private String mParam2;
     TextView xmlLabel;
+    EditText emailID;
+    String resultXML="";
+
 
 
     public ResultFragment() {
@@ -85,17 +105,52 @@ public class ResultFragment extends Fragment implements  View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Toolbar mtoolBar = (Toolbar)((AppCompatActivity) getActivity()).findViewById(R.id.toolbar);
+        TextView titleBar = (TextView)mtoolBar.findViewById(R.id.title);
+        titleBar.setText("Generated XML");
+        ImageView homeView = (ImageView)mtoolBar.findViewById(R.id.home_icon);
+        homeView.setVisibility(View.VISIBLE);
+        homeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                Intent homeIntent = new Intent(getActivity(), MainActivity.class);
+                homeIntent.setFlags(homeIntent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
+                startActivity(homeIntent);
+            }
+        });
+
+        ImageView preView = (ImageView)mtoolBar.findViewById(R.id.map_icon);
+        preView.setVisibility(View.VISIBLE);
+        preView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent homeIntent = new Intent(getActivity(), VerticalLinearLayoutActivity.class);
+
+                startActivity(homeIntent);
+            }
+        });
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_result, container, false);
          xmlLabel = (TextView)v.findViewById(R.id.resultView);
         if(!TextUtils.isEmpty(mParam1)){
-            String resultantXML  = format(mParam1);
-            xmlLabel.setText(resultantXML);
+            resultXML  = format(mParam1);
+            xmlLabel.setText(resultXML);
         }
         Button emailButton  = (Button)v.findViewById(R.id.email);
         emailButton.setOnClickListener(this);
+        emailID = (EditText)v.findViewById(R.id.email_txt);
+        Button saveLocally = (Button)v.findViewById(R.id.save);
+        saveLocally.setOnClickListener(this);
         return v;
     }
 
@@ -103,7 +158,15 @@ public class ResultFragment extends Fragment implements  View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.email:
-                sendEmail();
+                if(!TextUtils.isEmpty(emailID.getText().toString())) {
+                    sendEmail();
+                }else{
+                    Toast.makeText(getActivity(),"Email not entered",Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.save:
+                checkForPermissions();
+                /*writeToXMLFile(resultXML);*/
                 break;
         }
     }
@@ -149,7 +212,7 @@ public class ResultFragment extends Fragment implements  View.OnClickListener {
 
         emailIntent.setType("plain/text");
 
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"b.chandrasaimohan@gmail.com"});
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{emailID.getText().toString()});
 
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Linear Layout Vertical orientation Generated XML");
 
@@ -163,5 +226,82 @@ public class ResultFragment extends Fragment implements  View.OnClickListener {
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailtext.getText());
         startActivity(Intent.createChooser(emailIntent, "Send email..."));*/
 
+    }
+
+    private void checkForPermissions(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(getActivity())) {
+                requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            } else {
+                // continue with your code
+                Log.d("TAG","Can write");
+            }
+        }else{
+            Log.d("TAG","Build.VERSION.SDK_INT <= Build.VERSION_CODES.M");
+        }
+     // int hasWriteExternalStoragePermission  = getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        //if(getActivity().checkSelfPermission(Manifest.Per))
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e("Permission", "Granted");
+                    writeToXMLFile(resultXML);
+                } else {
+                    Log.e("Permission", "Denied");
+                }
+                return;
+            }
+        }
+    }
+
+    private void writeToXMLFile(String xml){
+        File root=null;
+        if(!TextUtils.isEmpty(xml)) {
+            try {
+                // check for SDcard
+                root = Environment.getExternalStorageDirectory();
+                Log.i("ResultFragment", "path.." + root.canWrite());
+             /*   String newFolder = "/layoutGenerator";
+                String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                File myNewFolder = new File(extStorageDirectory + newFolder);
+                myNewFolder.mkdir();*/
+               if(root.canWrite()){
+                    // create a File object for the parent directory
+                    File sourceDirectory = new File("/sdcard/layoutGenerator/");
+                    if(!sourceDirectory.exists()) {
+                        sourceDirectory.mkdirs();
+                        Log.d("TAG", "Directory Created");
+
+                    }else{
+                        Log.d("TAG", "Directory Already Exists");
+                    }
+
+                    String fileName = "uilayout" + System.currentTimeMillis();
+                    File file= new File(sourceDirectory, fileName+".txt");
+                    Log.d("ResultFragment", "FileName::::" + fileName);
+                    FileWriter filewriter = new FileWriter(file);
+                    BufferedWriter out = new BufferedWriter(filewriter);
+                    out.write(xml);
+                    out.close();
+                }
+
+            /*    FileOutputStream fos = new FileOutputStream(new File(getActivity().getFilesDir(), fileName + ".xml"));
+             //   FileOutputStream fileos = getActivity().openFileOutput(fileName, Context.MODE_PRIVATE);
+                fos.write(xml.getBytes());
+                fos.close();*/
+            } /*catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }*/ catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            Toast.makeText(getActivity(),"XML NOT FOUND",Toast.LENGTH_LONG).show();
+        }
     }
 }

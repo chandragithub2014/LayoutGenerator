@@ -10,7 +10,9 @@
         tools:context="layout.layoutgenerator.MainActivity"
 
         android:layout_gravity="top|left">
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
         <FrameLayout
             android:layout_width="match_parent"

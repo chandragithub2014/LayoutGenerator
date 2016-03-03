@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +16,10 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +46,7 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
     View v = null;
 
     int mContainerId = -1;
+    Toolbar mtoolBar;
 
     @Nullable
     @Override
@@ -49,6 +54,9 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
          super.onCreateView(inflater, container, savedInstanceState);
         mContainerId = container.getId();
          v  = inflater.inflate(R.layout.widgetlayout, container, false);
+        mtoolBar = (Toolbar)((AppCompatActivity) getActivity()).findViewById(R.id.toolbar);
+        TextView titleBar = (TextView)mtoolBar.findViewById(R.id.title);
+        titleBar.setText("VERTICAL LINEAR LAYOUT  GENERATOR");
         widgetPropertiesDTO = new WidgetPropertiesDTO();
         initializeViews(v);
        checkAndPopulateWithDataForPosition();
@@ -60,7 +68,6 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
     }
 
     private void initializeViews(View v){
-        screenWidth = (EditText)v.findViewById(R.id.width);
         customWidth  = (EditText)v.findViewById(R.id.custom_width);
         customHeight = (EditText)v.findViewById(R.id.custom_height);
         widgetPadding  = (EditText)v.findViewById(R.id.padding);
@@ -73,7 +80,7 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
         gravitySelector = (Spinner)v.findViewById(R.id.gravity_selector);
 
         //FooterLayout
-        RelativeLayout footerLayout = (RelativeLayout)v.findViewById(R.id.footerlayout);
+        LinearLayout footerLayout = (LinearLayout)v.findViewById(R.id.footerlayout);
         finish_btn = (Button)footerLayout.findViewById(R.id.finish_btn);
         next_btn = (Button)footerLayout.findViewById(R.id.next_btn);
 
@@ -91,7 +98,7 @@ private void checkAndPopulateWithDataForPosition(){
     int position = MobileApplication.getInstance().getWidgetPos();
     Log.d("ViewFragment","Position::::"+position);
     position = position + 1;
-    Log.d("ViewFragment","Incremented Position::::"+position);
+   // Log.d("ViewFragment","Incremented Position::::"+position);
     WidgetPropertiesDTO value = MobileApplication.getInstance().getWidgetInfoMap().get(position);
     if(value!=null){
         //Populate WidgetName
@@ -106,6 +113,7 @@ private void checkAndPopulateWithDataForPosition(){
             if(!value.getWidth().equalsIgnoreCase("match_parent") || !value.getWidth().equalsIgnoreCase("wrap_content")){
                 String dimension = value.getWidth();
                 String alteredString = dimension.substring(0,dimension.length()-2);
+                customWidth.setVisibility(View.VISIBLE);
                 customWidth.setText(alteredString);
                 int pos = list.indexOf("Custom");
                 widthSelector.setSelection(pos);
@@ -120,6 +128,7 @@ private void checkAndPopulateWithDataForPosition(){
             if(!value.getHeight().equalsIgnoreCase("match_parent") || !value.getHeight().equalsIgnoreCase("wrap_content")){
                 String dimension = value.getHeight();
                 String alteredString = dimension.substring(0,dimension.length()-2);
+                customHeight.setVisibility(View.VISIBLE);
                 customHeight.setText(alteredString);
                 int pos = list.indexOf("Custom");
                 heightSelector.setSelection(pos);
@@ -193,6 +202,7 @@ private void checkAndPopulateWithDataForPosition(){
             case R.id.width_selector:
 
                 if(position==2){
+                    customWidth.setVisibility(View.VISIBLE);
                   /*  if(!TextUtils.isEmpty(customWidth.getText().toString())){
                         widgetPropertiesDTO.setWidth(customWidth.getText().toString() + "dp");
                     }
@@ -200,11 +210,13 @@ private void checkAndPopulateWithDataForPosition(){
                         widgetPropertiesDTO.setWidth("50"+"dp");
                     }*/
                 }else {
+                    customWidth.setVisibility(View.GONE);
                     widgetPropertiesDTO.setWidth(widthSelector.getItemAtPosition(position).toString());
                 }
                 break;
             case R.id.height_selector:
                 if(position==2){
+                    customHeight.setVisibility(View.VISIBLE);
                 /*    if(!TextUtils.isEmpty(customHeight.getText().toString())){
                         widgetPropertiesDTO.setHeight(customHeight.getText().toString()+"dp");
                     }
@@ -212,6 +224,7 @@ private void checkAndPopulateWithDataForPosition(){
                         widgetPropertiesDTO.setHeight("50" + "dp");
                     }*/
                 }else {
+                    customHeight.setVisibility(View.GONE);
                     widgetPropertiesDTO.setHeight(heightSelector.getItemAtPosition(position).toString());
                 }
                 break;
@@ -229,7 +242,7 @@ private void checkAndPopulateWithDataForPosition(){
 
     private void createWidgetProperties(){
 
-        calculateScreenWidth();
+  //      calculateScreenWidth();
     //    fetchSelectedWidget();
      //   calculateWidgetWidth();
      //   calculateWidgetHeight();
@@ -261,6 +274,11 @@ private void checkAndPopulateWithDataForPosition(){
             int widgetPos = MobileApplication.getInstance().getWidgetPos();
             widgetPos = widgetPos + 1;
             MobileApplication.getInstance().setWidgetPos(widgetPos);
+            if(!TextUtils.isEmpty(widgetPropertiesDTO.getWidgetName())) {
+                if (widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("ImageView") || widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("ImageButton")) {
+                    widgetPropertiesDTO.setWidgetDrawable("ic_launcher");
+                }
+            }
 /*            if(MobileApplication.getInstance().getWidgetList().size()>0){
                 List<WidgetPropertiesDTO> tempList = MobileApplication.getInstance().getWidgetList();
                 tempList.add(widgetPropertiesDTO);

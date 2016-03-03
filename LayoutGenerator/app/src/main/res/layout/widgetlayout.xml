@@ -4,28 +4,42 @@
     android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/scrolllayout"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/footerlayout"
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+
             >
-          <EditText
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:hint="Screen Width"
-
-              android:id="@+id/width"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Widget Info"
+                android:textColor="#FFFFFF"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="normal"
+                android:gravity="center"
+                android:background="#ff058fff"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Select Widget"
+                android:textColor="#990d75"
+                android:textStyle="bold"
+                android:textSize="20dp"
+
                 />
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/widget_selector"
                 android:drawSelectorOnTop="true"
@@ -33,13 +47,32 @@
                 android:prompt="@string/select_prompt"
                 ></Spinner>
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/label"
+                android:hint="Widget Name"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Widget Dimensions"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textStyle="normal"
+                android:background="#ff058fff"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Select Width"
+                android:textColor="#990d75"
+                android:textStyle="bold"
+                android:textSize="20dp"
                 />
               <Spinner
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:id="@+id/width_selector"
                   android:drawSelectorOnTop="true"
@@ -50,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Custom Width"
+                android:visibility="gone"
                 android:id="@+id/custom_width"/>
 
 
@@ -58,9 +92,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select Height"
+                android:textColor="#990d75"
+                android:textStyle="bold"
+                android:textSize="20dp"
                 />
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/height_selector"
                 android:drawSelectorOnTop="true"
@@ -71,12 +108,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Custom Height"
+                android:visibility="gone"
                 android:id="@+id/custom_height"/>
-            <EditText
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/label"
-                android:hint="Widget Name"/>
+                android:text="Alignments"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:textColor="#FFFFFF"
+                android:background="#ff058fff"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -92,9 +136,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select Gravity"
+                android:textColor="#990d75"
+                android:textStyle="bold"
+                android:textSize="20dp"
                 />
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/gravity_selector"
                 android:drawSelectorOnTop="true"
@@ -103,8 +150,9 @@
 
         </LinearLayout>
 
-    </ScrollView>
 
+
+    </ScrollView>
 
     <include
         android:id="@+id/footerlayout"
@@ -113,5 +161,6 @@
         android:layout_height="wrap_content"
         layout="@layout/footer"
         ></include>
+
 
 </RelativeLayout>
