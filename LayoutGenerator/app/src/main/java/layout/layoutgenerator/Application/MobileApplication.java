@@ -25,6 +25,8 @@ public class MobileApplication extends Application {
     private int rowPosition;
    private HashMap<Integer,HashMap<Integer,WidgetPropertiesDTO>> rowHashMap = new  HashMap<Integer,HashMap<Integer,WidgetPropertiesDTO>>() ;
    private boolean isBack;
+    private int layoutType;
+    private HashMap<String,String> colorHash = new HashMap<String,String>();
     @Override
     public void onCreate() {
         super.onCreate();
@@ -114,5 +116,21 @@ public class MobileApplication extends Application {
 
     public void setIsBack(boolean isBack) {
         this.isBack = isBack;
+    }
+
+    public int getLayoutType() {
+        return layoutType;
+    }
+
+    public void setLayoutType(int layoutType) {
+        this.layoutType = layoutType;
+    }
+
+    public HashMap<String, String> getColorHash() {
+        return colorHash;
+    }
+
+    public void setColorHash(HashMap<String, String> colorHash) {
+        this.colorHash = colorHash;
     }
 }

@@ -15,6 +15,8 @@ public class WidgetPropertiesDTO {
     String widgetLabel;
     String widgetDrawable; //for ImageView,ImageButton
     String widgetWeight;
+    String color;
+    String textSize;
     public String getWidgetName() {
         return widgetName;
     }
@@ -93,5 +95,21 @@ public class WidgetPropertiesDTO {
 
     public void setWidgetWeight(String widgetWeight) {
         this.widgetWeight = widgetWeight;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getTextSize() {
+        return textSize;
+    }
+
+    public void setTextSize(String textSize) {
+        this.textSize = textSize;
     }
 }

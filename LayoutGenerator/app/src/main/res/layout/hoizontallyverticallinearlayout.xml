@@ -92,6 +92,27 @@
             />
 
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Widget Styling"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:background="#ff058fff"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/color_selector"
+        android:drawSelectorOnTop="true"
+        android:entries="@array/colorselector"></Spinner>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textsize"
+        android:hint="TextSize"
+        android:inputType="number"
+        android:text="18"/>
 
 </LinearLayout>

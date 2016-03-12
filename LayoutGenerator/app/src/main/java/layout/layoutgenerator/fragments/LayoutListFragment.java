@@ -119,6 +119,7 @@ public class LayoutListFragment extends Fragment implements MyClickListener{
     public void onItemClick(int position, View v) {
         if(position==0){
             //End
+            MobileApplication.getInstance().setLayoutType(0);
             MobileApplication.getInstance().setIsGeneratorFragment(true);
             MobileApplication.getInstance().setWidgetPos(0);
             HashMap<Integer,WidgetPropertiesDTO> widgetInfo = new HashMap<Integer,WidgetPropertiesDTO>();
@@ -128,6 +129,7 @@ public class LayoutListFragment extends Fragment implements MyClickListener{
                     .commit();
             //View.generateViewId();
         }else{
+            MobileApplication.getInstance().setLayoutType(1);
             MobileApplication.getInstance().setIsHorizonVertGeneratorFragment(true);
             MobileApplication.getInstance().setRowPosition(0);
             HashMap<Integer, HashMap<Integer, WidgetPropertiesDTO>> rowHash = new HashMap<Integer, HashMap<Integer, WidgetPropertiesDTO>>();

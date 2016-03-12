@@ -83,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Custom Width"
+                android:inputType="number"
                 android:visibility="gone"
                 android:id="@+id/custom_width"/>
 
@@ -108,6 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Custom Height"
+                android:inputType="number"
                 android:visibility="gone"
                 android:id="@+id/custom_height"/>
 
@@ -125,11 +127,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/padding"
+                android:inputType="number"
                 android:hint="Padding for the View"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/margin"
+                android:inputType="number"
                 android:hint="Margin for the View"/>
 
             <TextView
@@ -147,6 +151,30 @@
                 android:drawSelectorOnTop="true"
                 android:entries="@array/gravityselector"></Spinner>
 
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Widget Styling"
+                android:textColor="#FFFFFF"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="normal"
+                android:gravity="center"
+                android:background="#ff058fff"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/color_selector"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/colorselector"></Spinner>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textsize"
+                android:hint="TextSize"
+                android:inputType="number"
+                android:text="18"/>
 
         </LinearLayout>
 

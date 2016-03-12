@@ -163,6 +163,14 @@ public class XMLGenerator {
                         xmlSerializer.attribute("", "android:stepSize", "1.0");
                         xmlSerializer.attribute("", "android:rating", "2.0");
                     }
+                    if(temp.getWidgetName().equalsIgnoreCase("TextView") || temp.getWidgetName().equalsIgnoreCase("EditText") || temp.getWidgetName().equalsIgnoreCase("Button")){
+                        xmlSerializer.attribute("", "android:textSize", temp.getTextSize());
+
+                    }
+                    String colorSelector = temp.getColor();
+                    String hexaDecimalColorCode = MobileApplication.getInstance().getColorHash().get(colorSelector);
+                    xmlSerializer.attribute("", " android:background", hexaDecimalColorCode);
+
                     xmlSerializer.endTag("", temp.getWidgetName());
                 }
             }
@@ -290,7 +298,16 @@ public class XMLGenerator {
                         xmlSerializer.attribute("", "android:layout_weight", "50");
                     }
                     xmlSerializer.attribute("", "android:layout_weight", temp.getWidgetWeight());
+                    if(temp.getWidgetName().equalsIgnoreCase("TextView") || temp.getWidgetName().equalsIgnoreCase("EditText") ||  temp.getWidgetName().equalsIgnoreCase("Button")){
+                        xmlSerializer.attribute("", "android:textSize", temp.getTextSize());
+
+                    }
+                    String colorSelector = temp.getColor();
+                    String hexaDecimalColorCode = MobileApplication.getInstance().getColorHash().get(colorSelector);
+                    xmlSerializer.attribute("", " android:background", hexaDecimalColorCode);
                     xmlSerializer.endTag("", temp.getWidgetName());
+
+
                 }
 
                 xmlSerializer.endTag("", "LinearLayout");

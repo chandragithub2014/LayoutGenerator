@@ -37,8 +37,8 @@ import layout.layoutgenerator.utils.XMLGenerator;
  */
 public class ViewFragment extends Fragment implements  View.OnClickListener, AdapterView.OnItemSelectedListener{
 
-    EditText screenWidth,customWidth,customHeight,widgetPadding,widgetMargin,widgetLabel;
-    Spinner widgetSelector,widthSelector,heightSelector,gravitySelector;
+    EditText screenWidth,customWidth,customHeight,widgetPadding,widgetMargin,widgetLabel,widgetTextSize;
+    Spinner widgetSelector,widthSelector,heightSelector,gravitySelector,colorSelector;
     Button finish_btn,next_btn;
     WidgetPropertiesDTO widgetPropertiesDTO;
 
@@ -72,13 +72,14 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
         customHeight = (EditText)v.findViewById(R.id.custom_height);
         widgetPadding  = (EditText)v.findViewById(R.id.padding);
         widgetMargin  = (EditText)v.findViewById(R.id.margin);
-        widgetLabel  = (EditText)v.findViewById(R.id.label);
+        widgetLabel  =  (EditText)v.findViewById(R.id.label);
+        widgetTextSize = (EditText)v.findViewById(R.id.textsize);
 
         widgetSelector = (Spinner)v.findViewById(R.id.widget_selector);
         widthSelector = (Spinner)v.findViewById(R.id.width_selector);
         heightSelector = (Spinner)v.findViewById(R.id.height_selector);
         gravitySelector = (Spinner)v.findViewById(R.id.gravity_selector);
-
+        colorSelector= (Spinner)v.findViewById(R.id.color_selector);
         //FooterLayout
         LinearLayout footerLayout = (LinearLayout)v.findViewById(R.id.footerlayout);
         finish_btn = (Button)footerLayout.findViewById(R.id.finish_btn);
@@ -92,6 +93,7 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
         widthSelector.setOnItemSelectedListener(this);
         heightSelector.setOnItemSelectedListener(this);
         gravitySelector.setOnItemSelectedListener(this);
+        colorSelector.setOnItemSelectedListener(this);
 
     }
 private void checkAndPopulateWithDataForPosition(){
@@ -110,7 +112,7 @@ private void checkAndPopulateWithDataForPosition(){
         list=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.dimension)) );  // your array id of string resource
         if(!TextUtils.isEmpty(value.getWidth())){
             Log.d("ViewFragment","Width:::::"+value.getWidth());
-            if(!value.getWidth().equalsIgnoreCase("match_parent") || !value.getWidth().equalsIgnoreCase("wrap_content")){
+            if(!value.getWidth().equalsIgnoreCase("match_parent") &&!value.getWidth().equalsIgnoreCase("wrap_content")){
                 String dimension = value.getWidth();
                 String alteredString = dimension.substring(0,dimension.length()-2);
                 customWidth.setVisibility(View.VISIBLE);
@@ -125,7 +127,7 @@ private void checkAndPopulateWithDataForPosition(){
 
         if(!TextUtils.isEmpty(value.getHeight())){
             Log.d("ViewFragment","Height:::::"+value.getHeight());
-            if(!value.getHeight().equalsIgnoreCase("match_parent") || !value.getHeight().equalsIgnoreCase("wrap_content")){
+            if(!value.getHeight().equalsIgnoreCase("match_parent") && !value.getHeight().equalsIgnoreCase("wrap_content")){
                 String dimension = value.getHeight();
                 String alteredString = dimension.substring(0,dimension.length()-2);
                 customHeight.setVisibility(View.VISIBLE);
@@ -156,6 +158,15 @@ private void checkAndPopulateWithDataForPosition(){
             widgetLabel.setText(value.getWidgetLabel());
         }
 
+    // styling
+        list=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.colorselector)) );
+        if(!TextUtils.isEmpty(value.getColor())) {
+            int pos = list.indexOf(value.getColor());
+            colorSelector.setSelection(pos);
+        }
+        if(!TextUtils.isEmpty(value.getTextSize())){
+            widgetTextSize.setText(value.getTextSize());
+        }
 
     }else{
         populateSpinnerDefaultValues();
@@ -167,6 +178,8 @@ private void checkAndPopulateWithDataForPosition(){
         widgetPropertiesDTO.setWidth(widthSelector.getItemAtPosition(0).toString());
         widgetPropertiesDTO.setHeight(heightSelector.getItemAtPosition(0).toString());
         widgetPropertiesDTO.setGravity(gravitySelector.getItemAtPosition(0).toString());
+        widgetPropertiesDTO.setColor(colorSelector.getItemAtPosition(0).toString());
+
 
     }
 
@@ -197,7 +210,7 @@ private void checkAndPopulateWithDataForPosition(){
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch(parent.getId()){
             case R.id.widget_selector:
-                widgetPropertiesDTO.setWidgetName( widgetSelector.getItemAtPosition(position).toString());
+                widgetPropertiesDTO.setWidgetName(widgetSelector.getItemAtPosition(position).toString());
                 break;
             case R.id.width_selector:
 
@@ -232,6 +245,11 @@ private void checkAndPopulateWithDataForPosition(){
                 String selectedGravity =   gravitySelector.getItemAtPosition(position).toString();
                 widgetPropertiesDTO.setGravity(selectedGravity);
                 break;
+            case R.id.color_selector:
+                String selectedColor = colorSelector.getItemAtPosition(position).toString();
+                widgetPropertiesDTO.setColor(selectedColor);
+
+                break;
         }
     }
 
@@ -247,6 +265,7 @@ private void checkAndPopulateWithDataForPosition(){
      //   calculateWidgetWidth();
      //   calculateWidgetHeight();
         calculatePaddingAndMargin();
+        calculateWidgetTextSize();
      //   calculateGravity();
             if(!TextUtils.isEmpty(customWidth.getText().toString())){
                 widgetPropertiesDTO.setWidth(customWidth.getText().toString()+"dp");
@@ -263,6 +282,8 @@ private void checkAndPopulateWithDataForPosition(){
                 && !TextUtils.isEmpty(widgetPropertiesDTO.getPadding())
                 && !TextUtils.isEmpty(widgetPropertiesDTO.getMargin())
                 && !TextUtils.isEmpty(widgetPropertiesDTO.getGravity())
+                && !TextUtils.isEmpty(widgetPropertiesDTO.getColor())
+                && !TextUtils.isEmpty(widgetPropertiesDTO.getTextSize())
                 ){
             if(!TextUtils.isEmpty(widgetLabel.getText().toString())){
                 widgetPropertiesDTO.setWidgetLabel(widgetLabel.getText().toString());
@@ -345,6 +366,14 @@ private void checkAndPopulateWithDataForPosition(){
     }
 
 
+private void calculateWidgetTextSize(){
+    Log.d("ViewFragment","WidgetTextSize::::"+widgetTextSize.getText().toString());
+    if(!TextUtils.isEmpty(widgetTextSize.getText().toString())){
+        widgetPropertiesDTO.setTextSize(widgetTextSize.getText().toString() + "sp");
+    }else{
+        widgetPropertiesDTO.setTextSize("18sp");
+    }
+}
 
 
 

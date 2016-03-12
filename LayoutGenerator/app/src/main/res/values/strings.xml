@@ -8,11 +8,11 @@
     </string-array>
 
     <string-array name="gravityselector">
-        <item>bottom</item>
-        <item>center</item>
-        <item>end</item>
         <item>left</item>
         <item>right</item>
+        <item>center</item>
+        <item>bottom</item>
+        <item>end</item>
         <item>start</item>
         <item>top</item>
         <item>center_horizontal</item>
@@ -48,7 +48,20 @@
         <item>50</item>
         <item>75</item>
         <item>100</item>
+    </string-array>
 
+    <string-array name="colorselector">
+        <item>White</item>
+        <item>Black</item>
+        <item>Red</item>
+        <item>Cyan</item>
+        <item>Blue</item>
+        <item>Purple</item>
+        <item>Yellow</item>
+        <item>Magenta</item>
+         <item>Orange</item>
+        <item>Blue Gray</item>
+        <item>Slate Gray</item>
 
     </string-array>
 

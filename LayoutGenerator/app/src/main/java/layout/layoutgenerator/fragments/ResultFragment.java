@@ -48,9 +48,11 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import layout.layoutgenerator.Application.MobileApplication;
 import layout.layoutgenerator.MainActivity;
 import layout.layoutgenerator.R;
 import layout.layoutgenerator.preview.VerticalLinearLayoutActivity;
+import layout.layoutgenerator.preview.VerticallyHorizontalLinearLayoutActivity;
 
 
 /**
@@ -127,10 +129,15 @@ public class ResultFragment extends Fragment implements  View.OnClickListener {
         preView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MobileApplication.getInstance().getLayoutType() == 0) {
+                    Intent homeIntent = new Intent(getActivity(), VerticalLinearLayoutActivity.class);
 
-                Intent homeIntent = new Intent(getActivity(), VerticalLinearLayoutActivity.class);
+                    startActivity(homeIntent);
+                } else if (MobileApplication.getInstance().getLayoutType() == 1) {
+                    Intent homeIntent = new Intent(getActivity(), VerticallyHorizontalLinearLayoutActivity.class);
 
-                startActivity(homeIntent);
+                    startActivity(homeIntent);
+                }
             }
         });
 

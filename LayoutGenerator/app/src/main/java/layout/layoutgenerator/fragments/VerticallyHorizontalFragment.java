@@ -58,6 +58,8 @@ public class VerticallyHorizontalFragment extends Fragment implements  AdapterVi
     Spinner gravitySelector1,gravitySelector2,gravitySelector3,gravitySelector4;
     EditText widgetMargin1,widgetMargin2,widgetMargin3,widgetMargin4;
     EditText widgetPadding1,widgetPadding2,widgetPadding3,widgetPadding4;
+    EditText  widgetTextSize1,widgetTextSize2,widgetTextSize3,widgetTextSize4;
+    Spinner colorSelector1,colorSelector2,colorSelector3,colorSelector4;
 
     Button finish_btn,next_btn;
     List<HashMap<Integer,WidgetPropertiesDTO>> colList;
@@ -168,8 +170,12 @@ public class VerticallyHorizontalFragment extends Fragment implements  AdapterVi
 
         gravitySelector1 = (Spinner)widget1View.findViewById(R.id.gravity_selector);
 
+
         widgetMargin1 = (EditText)widget1View.findViewById(R.id.margin);
         widgetPadding1 = (EditText)widget1View.findViewById(R.id.padding);
+
+        colorSelector1= (Spinner)widget1View.findViewById(R.id.color_selector);
+        widgetTextSize1 = (EditText)widget1View.findViewById(R.id.textsize);
 
         //margin
  }
@@ -193,6 +199,9 @@ public class VerticallyHorizontalFragment extends Fragment implements  AdapterVi
         gravitySelector2 = (Spinner)widget2View.findViewById(R.id.gravity_selector);
         widgetMargin2 = (EditText)widget2View.findViewById(R.id.margin);
         widgetPadding2 = (EditText)widget2View.findViewById(R.id.padding);
+
+        colorSelector2= (Spinner)widget2View.findViewById(R.id.color_selector);
+        widgetTextSize2 = (EditText)widget2View.findViewById(R.id.textsize);
     }
 
     private void initViewForWidget3(View v){
@@ -215,6 +224,9 @@ public class VerticallyHorizontalFragment extends Fragment implements  AdapterVi
         widgetMargin3 = (EditText)widget3View.findViewById(R.id.margin);
         widgetPadding3 = (EditText)widget3View.findViewById(R.id.padding);
          widget3Label = (TextView)v.findViewById(R.id.widgt3label);
+
+        colorSelector3= (Spinner)widget3View.findViewById(R.id.color_selector);
+        widgetTextSize3 = (EditText)widget3View.findViewById(R.id.textsize);
    }
 
     private void initViewForWidget4(View v){
@@ -236,6 +248,9 @@ public class VerticallyHorizontalFragment extends Fragment implements  AdapterVi
         widgetMargin4 = (EditText)widget4View.findViewById(R.id.margin);
         widgetPadding4 = (EditText)widget4View.findViewById(R.id.padding);
          widget4Label = (TextView)v.findViewById(R.id.widgt4label);
+
+        colorSelector4= (Spinner)widget4View.findViewById(R.id.color_selector);
+        widgetTextSize4 = (EditText)widget4View.findViewById(R.id.textsize);
     }
 
     private void initNextFinishButtons(View v){
@@ -281,6 +296,19 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
          widgetPadding1.setText(alteredString);
      }
 
+     ArrayList<String> colorList=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.colorselector)) );
+     if(!TextUtils.isEmpty(widgetPropertiesDTO.getColor())){
+         int pos = colorList.indexOf(widgetPropertiesDTO.getColor());
+         colorSelector1.setSelection(pos);
+     }
+
+     if(!TextUtils.isEmpty(widgetPropertiesDTO.getTextSize())) {
+         String padding = widgetPropertiesDTO.getTextSize();
+         String alteredString = padding.substring(0, padding.length() - 2);
+         widgetTextSize1.setText(alteredString);
+     }
+
+
  }
 
     private void populateDataForWidget2(WidgetPropertiesDTO widgetPropertiesDTO){
@@ -319,6 +347,19 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
             String alteredString = padding.substring(0, padding.length() - 2);
             widgetPadding2.setText(alteredString);
         }
+
+
+        ArrayList<String> colorList=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.colorselector)) );
+        if(!TextUtils.isEmpty(widgetPropertiesDTO.getColor())){
+            int pos = colorList.indexOf(widgetPropertiesDTO.getColor());
+            colorSelector2.setSelection(pos);
+        }
+
+        if(!TextUtils.isEmpty(widgetPropertiesDTO.getTextSize())) {
+            String padding = widgetPropertiesDTO.getTextSize();
+            String alteredString = padding.substring(0, padding.length() - 2);
+            widgetTextSize2.setText(alteredString);
+        }
     }
 
     private void populateDataForWidget3(WidgetPropertiesDTO widgetPropertiesDTO){
@@ -354,6 +395,19 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
             String padding = widgetPropertiesDTO.getPadding();
             String alteredString = padding.substring(0, padding.length() - 2);
             widgetPadding3.setText(alteredString);
+        }
+
+
+        ArrayList<String> colorList=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.colorselector)) );
+        if(!TextUtils.isEmpty(widgetPropertiesDTO.getColor())){
+            int pos = colorList.indexOf(widgetPropertiesDTO.getColor());
+            colorSelector3.setSelection(pos);
+        }
+
+        if(!TextUtils.isEmpty(widgetPropertiesDTO.getTextSize())) {
+            String padding = widgetPropertiesDTO.getTextSize();
+            String alteredString = padding.substring(0, padding.length() - 2);
+            widgetTextSize3.setText(alteredString);
         }
     }
 
@@ -392,6 +446,19 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
             String padding = widgetPropertiesDTO.getPadding();
             String alteredString = padding.substring(0, padding.length() - 2);
             widgetPadding4.setText(alteredString);
+        }
+
+
+        ArrayList<String> colorList=new ArrayList( Arrays.asList(getResources().getStringArray(R.array.colorselector)) );
+        if(!TextUtils.isEmpty(widgetPropertiesDTO.getColor())){
+            int pos = colorList.indexOf(widgetPropertiesDTO.getColor());
+            colorSelector4.setSelection(pos);
+        }
+
+        if(!TextUtils.isEmpty(widgetPropertiesDTO.getTextSize())) {
+            String padding = widgetPropertiesDTO.getTextSize();
+            String alteredString = padding.substring(0, padding.length() - 2);
+            widgetTextSize4.setText(alteredString);
         }
     }
 
@@ -622,6 +689,12 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
             temp.setWidgetDrawable("ic_launcher");
         }
 
+        temp.setColor(""+colorSelector1.getSelectedItem());
+        if(!TextUtils.isEmpty(widgetTextSize1.getText().toString())) {
+            temp.setTextSize(widgetTextSize1.getText().toString() + "sp");
+        }else{
+            temp.setTextSize("18" + "sp");
+        }
         setWidgetId(temp);
         colHashMap.put(1, temp);
     }
@@ -650,6 +723,15 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
         if (temp.getWidgetName().equalsIgnoreCase("ImageView") || temp.getWidgetName().equalsIgnoreCase("ImageButton")) {
             temp.setWidgetDrawable("ic_launcher");
         }
+
+        temp.setColor("" + colorSelector2.getSelectedItem());
+        if(!TextUtils.isEmpty(widgetTextSize2.getText().toString())) {
+            temp.setTextSize(widgetTextSize2.getText().toString() + "sp");
+        }else{
+            temp.setTextSize("18" + "sp");
+        }
+
+
         setWidgetId(temp);
         colHashMap.put(2,temp);
     }
@@ -674,12 +756,18 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
             temp.setWidgetLabel("");
         }
         temp.setWidgetWeight(""+weight3.getSelectedItem());
-        temp.setWidgetName(""+ widgetSelector3.getSelectedItem());
+        temp.setWidgetName("" + widgetSelector3.getSelectedItem());
 
         if (temp.getWidgetName().equalsIgnoreCase("ImageView") || temp.getWidgetName().equalsIgnoreCase("ImageButton")) {
             temp.setWidgetDrawable("ic_launcher");
         }
 
+        temp.setColor("" + colorSelector3.getSelectedItem());
+        if(!TextUtils.isEmpty(widgetTextSize3.getText().toString())) {
+            temp.setTextSize(widgetTextSize3.getText().toString() + "sp");
+        }else{
+            temp.setTextSize("18" + "sp");
+        }
         setWidgetId(temp);
 
         colHashMap.put(3, temp);
@@ -710,6 +798,12 @@ if(widgetPropertiesDTO.getWidgetName().equalsIgnoreCase("RatingBar")){
             temp.setWidgetDrawable("ic_launcher");
         }
 
+        temp.setColor("" + colorSelector4.getSelectedItem());
+        if(!TextUtils.isEmpty(widgetTextSize4.getText().toString())) {
+            temp.setTextSize(widgetTextSize4.getText().toString() + "sp");
+        }else{
+            temp.setTextSize("18" + "sp");
+        }
         setWidgetId(temp);
         colHashMap.put(4,temp);
     }

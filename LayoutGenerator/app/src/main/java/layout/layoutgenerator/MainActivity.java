@@ -31,13 +31,30 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.addView(mCustomView);
 
 
-
+        populateColorHashMap();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.framelayout, new LayoutListFragment())
                 .commit();
 
     }
 
+    private void populateColorHashMap(){
+
+      HashMap<String,String> colorHash = new HashMap<String,String>();
+        colorHash.put("Black","#000000");
+        colorHash.put("Red","#FF0000");
+        colorHash.put("Cyan","#00FFFF");
+        colorHash.put("Blue","#0000FF");
+        colorHash.put("Purple","#800080");
+        colorHash.put("Yellow","#FFFF00");
+        colorHash.put("Magenta","#FF00FF");
+        colorHash.put("White","#ffffff");
+        colorHash.put("Blue Gray","#FF00FF");
+        colorHash.put("Slate Gray","#FF00FF");
+        colorHash.put("Orange","#FFA500");
+
+        MobileApplication.getInstance().setColorHash(colorHash);
+    }
     @Override
     public void onBackPressed() {
         boolean isGeneratorFragment = MobileApplication.getInstance().isGeneratorFragment();

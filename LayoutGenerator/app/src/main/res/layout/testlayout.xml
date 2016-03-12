@@ -1,149 +1,4 @@
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        >
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="#ffffff">
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_margin="10dp"
-            android:numStars="4"
-            android:stepSize="1.0"
-            android:rating="2.0"/>
-        </FrameLayout>
-
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Weightttt"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        >
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="#ffffff">
-        <ImageView
-            android:id="@+id/ImageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="16dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher"
-            android:text="ABC" />
-        </FrameLayout>
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="#ffffff">
-
-
-        <ImageButton
-            android:id="@+id/ImageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_launcher"
-            android:text="are" />
-        </FrameLayout>
-
-
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        >
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="#ffffff">
-            <ImageView
-                android:id="@+id/ImageView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_margin="16dp"
-                android:padding="10dp"
-                android:src="@drawable/ic_launcher"
-                android:text="ABC" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Kewwww"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Weightttt"
-            android:layout_weight="1"/>
-        </LinearLayout>
-      <!--
-        <TextView
-       android:layout_width="0dp"
-       android:layout_height="wrap_content"
-       android:layout_weight="1"
-       android:text="Kewwww"/>
-
-      <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Weightttt"
-            android:layout_weight="1"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="EditTExttttttttttttttt"
-            android:layout_weight="1"/>-->
-
-
-
-
-</LinearLayout>
-
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -153,111 +8,354 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ImageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="16dp"
-            android:padding="10dp"
-            android:src="@drawable/ic_launcher"
-            android:text="ABC" />
-
-        <ImageButton
-            android:id="@+id/ImageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="16dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_launcher"
-            android:text="are" />
-    </LinearLayout>
-</ScrollView>-->
-    <!--
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView"
-            android:layout_gravity="right" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/ic_launcher"
-            android:padding="20dp"
-            android:layout_margin="50dp"
-            android:layout_gravity="left"
-            />
-
-        <ImageButton
+            android:id="@+id/TextView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
-            android:src="@drawable/ic_launcher"
-            android:layout_gravity="left"
-
-             />
-        <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="4"
-        android:stepSize="1.0"
-        android:rating="2.0"
-           android:layout_margin="20dp"
-            android:layout_gravity="right"
-            />
-    </LinearLayout>
--->
-
-
-<!--
-
-  <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView"
-            android:layout_gravity="center" />
-
-        <ImageView
-            android:id="@+id/ImageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="50dp"
-            android:padding="20dp"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"
-           />
-
-        <ImageButton
-            android:id="@+id/ImageButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:gravity="left"
-            android:src="@drawable/ic_launcher"
-           />
+            android:padding="5dp"
+            android:text="label" />
+
+        <EditText
+            android:id="@+id/EditText2"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:layout_margin="5dp"
+            android:gravity="right"
+            android:padding="5dp"
+            android:text="my editable" />
+
+        <Button
+            android:id="@+id/Button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="my button" />
+
+        <Spinner
+            android:id="@+id/Spinner4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="spin" />
 
         <RatingBar
-            android:id="@+id/RatingBar3"
+            android:id="@+id/RatingBar5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
             android:numStars="4"
             android:rating="2.0"
             android:stepSize="1.0"
-            />-->
+            android:text="RatingBar" />
+
+        <ImageButton
+            android:id="@+id/ImageButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_launcher"
+            android:text="ImageButton" />
+
+        <ImageView
+            android:id="@+id/ImageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_launcher"
+            android:text="ImageView" />
+
+        <RadioButton
+            android:id="@+id/RadioButton8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text="my radio" />
+
+        <CheckBox
+            android:id="@+id/CheckBox9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text="my check" />
+    </LinearLayout>
+</ScrollView>
+
+    <!--
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            >
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="#ffffff">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="10dp"
+                android:numStars="4"
+                android:stepSize="1.0"
+                android:rating="2.0"/>
+            </FrameLayout>
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Weightttt"
+                android:layout_gravity="right|center_vertical"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            >
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="#ffffff">
+            <ImageView
+                android:id="@+id/ImageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="16dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_launcher"
+                android:text="ABC" />
+            </FrameLayout>
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="#ffffff">
+
+
+            <ImageButton
+                android:id="@+id/ImageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_launcher"
+                android:text="are" />
+            </FrameLayout>
+
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            >
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="#ffffff">
+                <ImageView
+                    android:id="@+id/ImageView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_margin="16dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_launcher"
+                    android:text="ABC" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Kewwww"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Weightttt"
+                android:layout_weight="1"/>
+            </LinearLayout>
+          &lt;!&ndash;
+            <TextView
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="Kewwww"/>
+
+          <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Weightttt"
+                android:layout_weight="1"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="EditTExttttttttttttttt"
+                android:layout_weight="1"/>&ndash;&gt;
+
+
+
+
+    </LinearLayout>
+
+    &lt;!&ndash;<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ImageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="16dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_launcher"
+                android:text="ABC" />
+
+            <ImageButton
+                android:id="@+id/ImageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="16dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_launcher"
+                android:text="are" />
+        </LinearLayout>
+    </ScrollView>&ndash;&gt;
+        &lt;!&ndash;
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/textView"
+                android:layout_gravity="right" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/ic_launcher"
+                android:padding="20dp"
+                android:layout_margin="50dp"
+                android:layout_gravity="left"
+                />
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:src="@drawable/ic_launcher"
+                android:layout_gravity="left"
+
+                 />
+            <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="4"
+            android:stepSize="1.0"
+            android:rating="2.0"
+               android:layout_margin="20dp"
+                android:layout_gravity="right"
+                />
+        </LinearLayout>
+    &ndash;&gt;
+
+
+    &lt;!&ndash;
+
+      <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/textView"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/ImageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="50dp"
+                android:padding="20dp"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_launcher"
+               />
+
+            <ImageButton
+                android:id="@+id/ImageButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:src="@drawable/ic_launcher"
+               />
+
+            <RatingBar
+                android:id="@+id/RatingBar3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:numStars="4"
+                android:rating="2.0"
+                android:stepSize="1.0"
+                />&ndash;&gt;-->

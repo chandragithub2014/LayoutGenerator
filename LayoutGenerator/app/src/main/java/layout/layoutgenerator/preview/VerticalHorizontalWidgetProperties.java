@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,27 +25,43 @@ import layout.layoutgenerator.utils.UniqueIDGenerator;
 /**
  * Created by CHANDRASAIMOHAN on 3/4/2016.
  */
-public class WidgetProperties {
+public class VerticalHorizontalWidgetProperties {
 
-    private static WidgetProperties instance;
+    private static VerticalHorizontalWidgetProperties instance;
     Context ctx;
     XmlSerializer xmlSerializer;
-    private WidgetProperties(){
+    private VerticalHorizontalWidgetProperties(){
 
     }
 
 
-    public static WidgetProperties getInstance(){
+    public static VerticalHorizontalWidgetProperties getInstance(){
         if(instance == null){
-            instance = new WidgetProperties();
+            instance = new VerticalHorizontalWidgetProperties();
         }
         return instance;
     }
 
+    public LinearLayout setLinearLayoutHorizontalProperties(LinearLayout ll){
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int MATCH_PARENT = LinearLayout.LayoutParams.MATCH_PARENT;
+
+        LinearLayout.LayoutParams paramss;
+        paramss  = new LinearLayout.LayoutParams(MATCH_PARENT,WRAP_CONTENT);
+        ll.setOrientation(LinearLayout.HORIZONTAL);
+        ll.setWeightSum(100);
+        ll.setLayoutParams(paramss);
+        /*
+          xmlSerializer.attribute("", "android:orientation", "horizontal");
+                xmlSerializer.attribute("", "android:weightSum", "100");
+         */
+        return ll;
+    }
 
     public  TextView setTextViewProperties(TextView tv, WidgetPropertiesDTO temp) {
         int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
         int MATCH_PARENT = LinearLayout.LayoutParams.MATCH_PARENT;
+
         int width=0,height=0;
 
         LinearLayout.LayoutParams paramss;
@@ -55,25 +70,25 @@ public class WidgetProperties {
 
         tv.setId(UniqueIDGenerator.generateViewId());
         //Width
-        if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
-            //tv.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+  /*      if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
+
             width = LinearLayout.LayoutParams.WRAP_CONTENT;
     } else if (temp.getWidth().equalsIgnoreCase("match_parent")) {
-   //     tv.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+
         width = LinearLayout.LayoutParams.MATCH_PARENT;
     } else {
         String dimension = temp.getWidth();
         String alteredString = dimension.substring(0, dimension.length() - 2);
         width = Integer.parseInt(alteredString);
-        // tv.setWidth(Integer.parseInt(alteredString));
+
     }
 
         //Height
         if (temp.getHeight().equalsIgnoreCase("wrap_content")) {
-            //tv.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+
             height = LinearLayout.LayoutParams.WRAP_CONTENT;
         } else if (temp.getHeight().equalsIgnoreCase("match_parent")) {
-            //tv.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
+
             height = LinearLayout.LayoutParams.MATCH_PARENT;
         } else {
             String dimension = temp.getHeight();
@@ -83,7 +98,13 @@ public class WidgetProperties {
                 height = Integer.parseInt(alteredString);
             }
         }
-        paramss  = new LinearLayout.LayoutParams(width,height);
+        */
+        paramss  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
+
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            paramss.weight = Integer.parseInt(temp.getWidgetWeight());
+        }
         //padding
         if (!TextUtils.isEmpty(temp.getPadding())) {
             String dimension = temp.getPadding();
@@ -156,7 +177,6 @@ public class WidgetProperties {
             tv.setText(temp.getWidgetLabel());
         }
 
-
         //Color and TextSize
         if(!TextUtils.isEmpty(temp.getTextSize())){
             String dimension = temp.getTextSize();
@@ -169,9 +189,8 @@ public class WidgetProperties {
 
         if(!TextUtils.isEmpty(temp.getColor())){
             tv.setBackgroundColor(Color.parseColor(MobileApplication.getInstance().getColorHash().get(temp.getColor())));
-           // mTextView.setTextColor(Color.parseColor("#bdbdbd"));
+            // mTextView.setTextColor(Color.parseColor("#bdbdbd"));
         }
-
         tv.setLayoutParams(paramss);
         return tv;
     }
@@ -184,7 +203,15 @@ public class WidgetProperties {
 
         LinearLayout.LayoutParams paramss;
         tv.setId(UniqueIDGenerator.generateViewId());
-        //Width
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+        paramss  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            paramss.weight = Integer.parseInt(temp.getWidgetWeight());
+
+        }
+       /* //Width
         if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
             //tv.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -212,8 +239,8 @@ public class WidgetProperties {
                 //  tv.setHeight(Integer.parseInt(alteredString));
                 height = Integer.parseInt(alteredString);
             }
-        }
-        paramss  = new LinearLayout.LayoutParams(width,height);
+        }*/
+    //    paramss  = new LinearLayout.LayoutParams(width,height);
         //padding
         if (!TextUtils.isEmpty(temp.getPadding())) {
             String dimension = temp.getPadding();
@@ -296,11 +323,11 @@ public class WidgetProperties {
                 tv.setTextSize(padding);
             }
         }
-
         if(!TextUtils.isEmpty(temp.getColor())){
             tv.setBackgroundColor(Color.parseColor(MobileApplication.getInstance().getColorHash().get(temp.getColor())));
             // mTextView.setTextColor(Color.parseColor("#bdbdbd"));
         }
+
         tv.setLayoutParams(paramss);
         return tv;
     }
@@ -312,8 +339,16 @@ public class WidgetProperties {
 
         LinearLayout.LayoutParams paramss;
         tv.setId(UniqueIDGenerator.generateViewId());
+
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        paramss  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
+
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            paramss.weight = Integer.parseInt(temp.getWidgetWeight());
+        }
         //Width
-        if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
+      /*  if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
             //tv.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             width = LinearLayout.LayoutParams.WRAP_CONTENT;
         } else if (temp.getWidth().equalsIgnoreCase("match_parent")) {
@@ -341,7 +376,8 @@ public class WidgetProperties {
                 height = Integer.parseInt(alteredString);
             }
         }
-        paramss  = new LinearLayout.LayoutParams(width,height);
+        */
+      //  paramss  = new LinearLayout.LayoutParams(width,height);
 
         //padding
         if (!TextUtils.isEmpty(temp.getPadding())) {
@@ -445,7 +481,7 @@ public class WidgetProperties {
 
 
         //Width
-        if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
+     /*   if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
             //tv.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             width = LinearLayout.LayoutParams.WRAP_CONTENT;
         } else if (temp.getWidth().equalsIgnoreCase("match_parent")) {
@@ -465,7 +501,7 @@ public class WidgetProperties {
         }else{
             height = LinearLayout.LayoutParams.WRAP_CONTENT;
         }
-
+*/
 
         //padding
         if (!TextUtils.isEmpty(temp.getPadding())) {
@@ -477,7 +513,14 @@ public class WidgetProperties {
             }
         }
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,height);
+        LinearLayout.LayoutParams layoutParams ;
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
+
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            layoutParams.weight = Integer.parseInt(temp.getWidgetWeight());
+        }
         //margin
         if (!TextUtils.isEmpty(temp.getMargin())) {
             String dimension = temp.getMargin();
@@ -534,10 +577,14 @@ public class WidgetProperties {
 
 
         }
+
+
+
         if(!TextUtils.isEmpty(temp.getColor())){
             tv.setBackgroundColor(Color.parseColor(MobileApplication.getInstance().getColorHash().get(temp.getColor())));
             // mTextView.setTextColor(Color.parseColor("#bdbdbd"));
         }
+
         tv.setLayoutParams(layoutParams);
         return tv;
     }
@@ -551,7 +598,7 @@ int width =0,height = 0;
         tv.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);*/
 
         //Width
-        if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
+   /*     if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
             //tv.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             width = LinearLayout.LayoutParams.WRAP_CONTENT;
         } else if (temp.getWidth().equalsIgnoreCase("match_parent")) {
@@ -573,8 +620,14 @@ int width =0,height = 0;
         }
 
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,height);
+ */       LinearLayout.LayoutParams layoutParams;
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
 
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            layoutParams.weight = Integer.parseInt(temp.getWidgetWeight());
+        }
         //padding
         if (!TextUtils.isEmpty(temp.getPadding())) {
             String dimension = temp.getPadding();
@@ -660,7 +713,7 @@ int width =0,height = 0;
         tv.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);*/
         //Width
         //Width
-        if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
+   /*     if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
             //tv.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             width = LinearLayout.LayoutParams.WRAP_CONTENT;
         } else if (temp.getWidth().equalsIgnoreCase("match_parent")) {
@@ -680,9 +733,16 @@ int width =0,height = 0;
         }else{
             height = LinearLayout.LayoutParams.WRAP_CONTENT;
         }
+*/
 
+        LinearLayout.LayoutParams layoutParams;
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,height);
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            layoutParams.weight = Integer.parseInt(temp.getWidgetWeight());
+        }
         //Height
 
 
@@ -757,6 +817,7 @@ int width =0,height = 0;
         if (!TextUtils.isEmpty(temp.getWidgetLabel())) {
             tv.setText(temp.getWidgetLabel());
         }
+
         if(!TextUtils.isEmpty(temp.getColor())){
             tv.setBackgroundColor(Color.parseColor(MobileApplication.getInstance().getColorHash().get(temp.getColor())));
             // mTextView.setTextColor(Color.parseColor("#bdbdbd"));
@@ -774,30 +835,18 @@ int width =0,height = 0;
        /* LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         tv.setLayoutParams(layoutParams);*/
         //Width
-//Width
-       /* if (temp.getWidth().equalsIgnoreCase("wrap_content")) {
-            //tv.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-            width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        } else if (temp.getWidth().equalsIgnoreCase("match_parent")) {
-            //     tv.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-            width = LinearLayout.LayoutParams.MATCH_PARENT;
-        }else*/{
-            width = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+
+
+        LinearLayout.LayoutParams layoutParams;
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
+
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            layoutParams.weight = Integer.parseInt(temp.getWidgetWeight());
         }
 
-        //Height
-        /*if (temp.getHeight().equalsIgnoreCase("wrap_content")) {
-            //tv.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-            height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        } else if (temp.getHeight().equalsIgnoreCase("match_parent")) {
-            //tv.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
-            height = LinearLayout.LayoutParams.MATCH_PARENT;
-        }else*/{
-            height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        }
-
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,height);
         //Height
 
         //Height
@@ -891,7 +940,14 @@ int width =0,height = 0;
        /* LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         tv.setLayoutParams(layoutParams);*/
         //Width
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,height);
+        LinearLayout.LayoutParams layoutParams ;
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
+
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            layoutParams.weight = Integer.parseInt(temp.getWidgetWeight());
+        }
 
         //Height
 
@@ -981,7 +1037,14 @@ int width =0,height = 0;
         height = LinearLayout.LayoutParams.WRAP_CONTENT;
         tv.setId(UniqueIDGenerator.generateViewId());
         //Width
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,height);
+        LinearLayout.LayoutParams layoutParams;
+        int WRAP_CONTENT = LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams  = new LinearLayout.LayoutParams(0,WRAP_CONTENT);
+
+        //weight
+        if(!TextUtils.isEmpty(temp.getWidgetWeight())){
+            layoutParams.weight = Integer.parseInt(temp.getWidgetWeight());
+        }
 
 
      /*   //padding
@@ -1007,10 +1070,7 @@ int width =0,height = 0;
             }
         }
 
-        if(!TextUtils.isEmpty(temp.getColor())){
-            tv.setBackgroundColor(Color.parseColor(MobileApplication.getInstance().getColorHash().get(temp.getColor())));
-            // mTextView.setTextColor(Color.parseColor("#bdbdbd"));
-        }
+
         //gravity
         if (!TextUtils.isEmpty(temp.getGravity())) {
             String gravity = temp.getGravity();
@@ -1052,6 +1112,12 @@ int width =0,height = 0;
             tv.setRating(2f);
 
         }
+
+        if(!TextUtils.isEmpty(temp.getColor())){
+            tv.setBackgroundColor(Color.parseColor(MobileApplication.getInstance().getColorHash().get(temp.getColor())));
+            // mTextView.setTextColor(Color.parseColor("#bdbdbd"));
+        }
+
         tv.setLayoutParams(layoutParams);
         return tv;
     }
