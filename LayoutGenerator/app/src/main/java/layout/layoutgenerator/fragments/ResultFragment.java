@@ -51,6 +51,7 @@ import javax.xml.xpath.XPathFactory;
 import layout.layoutgenerator.Application.MobileApplication;
 import layout.layoutgenerator.MainActivity;
 import layout.layoutgenerator.R;
+import layout.layoutgenerator.preview.FrameLayoutActivity;
 import layout.layoutgenerator.preview.VerticalLinearLayoutActivity;
 import layout.layoutgenerator.preview.VerticallyHorizontalLinearLayoutActivity;
 
@@ -135,6 +136,10 @@ public class ResultFragment extends Fragment implements  View.OnClickListener {
                     startActivity(homeIntent);
                 } else if (MobileApplication.getInstance().getLayoutType() == 1) {
                     Intent homeIntent = new Intent(getActivity(), VerticallyHorizontalLinearLayoutActivity.class);
+
+                    startActivity(homeIntent);
+                }else if (MobileApplication.getInstance().getLayoutType() == 2) {
+                    Intent homeIntent = new Intent(getActivity(), FrameLayoutActivity.class);
 
                     startActivity(homeIntent);
                 }

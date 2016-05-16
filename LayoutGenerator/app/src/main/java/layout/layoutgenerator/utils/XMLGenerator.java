@@ -152,7 +152,11 @@ public class XMLGenerator {
                     if(temp.getWidgetName().equalsIgnoreCase("ImageView")||temp.getWidgetName().equalsIgnoreCase("ImageButton") ||temp.getWidgetName().equalsIgnoreCase("RatingBar") || temp.getWidgetName().equalsIgnoreCase("RadioButton") || temp.getWidgetName().equalsIgnoreCase("CheckBox")){
                         xmlSerializer.attribute("", "android:layout_gravity", temp.getGravity());
                     }else {
-                        xmlSerializer.attribute("", "android:gravity", temp.getGravity());
+                        if(MobileApplication.getInstance().isFrameLayout()){
+                            xmlSerializer.attribute("", "android:layout_gravity", temp.getGravity());
+                        }else {
+                            xmlSerializer.attribute("", "android:gravity", temp.getGravity());
+                        }
                     }
                     xmlSerializer.attribute("", "android:id", "@+id/" + temp.getWidgetId());
                     if(temp.getWidgetName().equalsIgnoreCase("ImageView")||temp.getWidgetName().equalsIgnoreCase("ImageButton")){
@@ -318,6 +322,68 @@ public class XMLGenerator {
             e.printStackTrace();
         }
         return  xmlSerializer;
+    }
+
+
+    //Frame Layout XML Serializer
+    public  String generateFrameLayoutUsingXMLSerializer() throws Exception {
+        String xml = "";
+        StringWriter writer=null;
+        try {
+            //   FileOutputStream fos = new FileOutputStream("layoutxml.xml");
+            //   FileOutputStream fileos = openFileOutput(xmlFile, Context.MODE_PRIVATE);
+
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            writer = new StringWriter();
+
+            xmlSerializer.setOutput(writer);
+            // start DOCUMENT
+            xmlSerializer.startDocument("UTF-8", true);
+
+            // open tag: <record>
+
+
+            xmlSerializer.startTag("",  "FrameLayout");
+            xmlSerializer.attribute("", "xmlns:android", "http://schemas.android.com/apk/res/android");
+            xmlSerializer.attribute("", "xmlns:tools", "http://schemas.android.com/tools");
+            xmlSerializer.attribute("", "android:layout_width", "match_parent");
+            xmlSerializer.attribute("", "android:layout_height", "match_parent");
+            xmlSerializer.attribute("", "android:background", "@drawable/ic_frame_bg");
+
+
+
+
+
+         /*   xmlSerializer.startTag("", "TextView");
+            xmlSerializer.attribute("", "android:layout_width", "wrap_content");
+            xmlSerializer.attribute("", "android:layout_height", "wrap_content");
+            xmlSerializer.attribute("", " android:text", "Hello World");
+
+            xmlSerializer.endTag("", "TextView");
+
+            xmlSerializer.startTag("", "TextView");
+            xmlSerializer.attribute("", "android:layout_width", "wrap_content");
+            xmlSerializer.attribute("", "android:layout_height", "wrap_content");
+            xmlSerializer.attribute("", " android:text", "Hello XML");
+            xmlSerializer.endTag("", "TextView");
+*/
+            xmlSerializer = updateXMLSerializerWithWidgets(xmlSerializer);
+            xmlSerializer.endTag("", "FrameLayout");
+
+
+            // end DOCUMENT
+            xmlSerializer.endDocument();
+
+            String dataWrite = writer.toString();
+            //  fileos.write(dataWrite.getBytes());
+            //  fileos.close();
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return writer.toString();
+
     }
 }
 

@@ -121,6 +121,7 @@ public class LayoutListFragment extends Fragment implements MyClickListener{
             //End
             MobileApplication.getInstance().setLayoutType(0);
             MobileApplication.getInstance().setIsGeneratorFragment(true);
+            MobileApplication.getInstance().setIsFrameLayout(false);
             MobileApplication.getInstance().setWidgetPos(0);
             HashMap<Integer,WidgetPropertiesDTO> widgetInfo = new HashMap<Integer,WidgetPropertiesDTO>();
             MobileApplication.getInstance().setWidgetInfoMap(widgetInfo);
@@ -128,7 +129,7 @@ public class LayoutListFragment extends Fragment implements MyClickListener{
                     .replace(mContainerId, new ViewFragment()).addToBackStack(null)
                     .commit();
             //View.generateViewId();
-        }else{
+        }else if(position == 1){
             MobileApplication.getInstance().setLayoutType(1);
             MobileApplication.getInstance().setIsHorizonVertGeneratorFragment(true);
             MobileApplication.getInstance().setRowPosition(0);
@@ -138,6 +139,18 @@ public class LayoutListFragment extends Fragment implements MyClickListener{
                     .replace(mContainerId, new VerticallyHorizontalFragment()).addToBackStack(null)
                     .commit();
             //  Toast.makeText(getActivity(),"Clicked on Position::::"+position,Toast.LENGTH_LONG).show();
+        }else  if(position==2){
+            //End
+            MobileApplication.getInstance().setLayoutType(2);
+            MobileApplication.getInstance().setIsGeneratorFragment(true);
+            MobileApplication.getInstance().setIsFrameLayout(true);
+            MobileApplication.getInstance().setWidgetPos(0);
+            HashMap<Integer,WidgetPropertiesDTO> widgetInfo = new HashMap<Integer,WidgetPropertiesDTO>();
+            MobileApplication.getInstance().setWidgetInfoMap(widgetInfo);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(mContainerId, new ViewFragment()).addToBackStack(null)
+                    .commit();
+            //View.generateViewId();
         }
     }
 
@@ -147,6 +160,8 @@ public class LayoutListFragment extends Fragment implements MyClickListener{
         if(position==0){
          infoFragment =          InfoFragment.newInstance(position,"");
         }else if(position==1){
+            infoFragment =          InfoFragment.newInstance(position,"");
+        }else if(position==2){
             infoFragment =          InfoFragment.newInstance(position,"");
         }
         getActivity().getSupportFragmentManager().beginTransaction()

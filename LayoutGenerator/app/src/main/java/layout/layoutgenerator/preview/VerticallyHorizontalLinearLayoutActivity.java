@@ -2,7 +2,10 @@ package layout.layoutgenerator.preview;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -32,6 +35,17 @@ public class VerticallyHorizontalLinearLayoutActivity extends AppCompatActivity 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vertical_linear_layout);
 Log.d("VerticalLinearLayout", "In Vertical Linear Layout");
+
+        //ToolBar Start
+        Toolbar   mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("PREVIEW");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        LayoutInflater mInflater= LayoutInflater.from(getApplicationContext());
+        View mCustomView = mInflater.inflate(R.layout.toolbar_custom_view, null);
+        mToolbar.addView(mCustomView);
+
         parentLayout = (LinearLayout)findViewById(R.id.containerroot);
         //rootLayout = (LinearLayout)findViewById(R.id.containerroot);
         /*int width  = LinearLayout.LayoutParams.MATCH_PARENT;

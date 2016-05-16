@@ -60,6 +60,22 @@ public class InfoFragment extends Fragment {
             " <b>Finish </b> button displays the resultant layout xml which you send to email or save it locally in your mobile.</p>\n" +
             "<h3>Enjoy layout generating !!!!!!!!!!!!!!</h3>";
 
+    private String getGetHtml_for_pos_3 =  "<h2>Frame Layout Generator</h2>\n" +
+            "<p>Frame Layout Layout generator generates a layout xml of Linear Layout in Vertical Orientation <br>\n" +
+            "This generator provides interface that allows you to generate FrameLayout with Vertical orientation <br> The procedure to generate layout is mentioned below: <br>\n" +
+            "</p>\n" +
+            "<h2>Procedure to generate layout</h2>\n" +
+            "<h2> Widget Info section </h2>\n" +
+            "<p>This section contains drop down to select preferred widget and Editable text field is provided to enter label for widget as per your requirement.</p>\n" +
+            "<h2> Widget Dimensions section </h2>\n" +
+            "<p>This section contains drop down to set selected widget's width and height. Selecting widget width or height to <b> custom </b>rather <b>match_parent or wrap_content </b>will allow to add dimensions as numbers</p>\n" +
+            "<h2> Allignments section </h2>\n" +
+            "<p>This section allows you  to set <b>margin or padding </b> which should be given in <b>integer numbers</b> <br> Also provides drop down which contains various options to  set <b> gravity  </b>for your widget </p>\n" +
+            "<h2>Next and Finish Buttons</h2>\n" +
+            "<p> <b>Next </b> button allows to configure next widget of your layout where you need to repeat the steps provided in above sections <br>\n" +
+            " <b>Finish </b> button displays the resultant layout xml which you send to email or save it locally in your mobile.</p>\n" +
+            "<h3>Enjoy layout generating !!!!!!!!!!!!!!</h3> ";
+
     public InfoFragment() {
         // Required empty public constructor
     }
@@ -101,6 +117,8 @@ public class InfoFragment extends Fragment {
             infoView.setText(Html.fromHtml(html_for_pos_1));
         }else if(mParam1==1){
             infoView.setText(Html.fromHtml(getHtml_for_pos_2));
+        }else if(mParam1==2){
+            infoView.setText(Html.fromHtml(getGetHtml_for_pos_3));
         }
 
         return view;

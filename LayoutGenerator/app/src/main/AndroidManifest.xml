@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".preview.VerticalLinearLayoutActivity"></activity>
         <activity android:name=".preview.VerticallyHorizontalLinearLayoutActivity"></activity>
+        <activity android:name=".preview.FrameLayoutActivity"></activity>
+
     </application>
 
 </manifest>

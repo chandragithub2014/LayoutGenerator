@@ -110,12 +110,12 @@ public class VerticallyHorizontalFragment extends Fragment implements  AdapterVi
         checkAndPrepopulateDataForEachRow();
     }
 
-    @Override
+/*    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d("vhorfra", "calling setRetainInstance(true)");
         setRetainInstance(true);
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

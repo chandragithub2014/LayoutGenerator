@@ -27,6 +27,7 @@ public class MobileApplication extends Application {
    private boolean isBack;
     private int layoutType;
     private HashMap<String,String> colorHash = new HashMap<String,String>();
+    private boolean isFrameLayout;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -132,5 +133,23 @@ public class MobileApplication extends Application {
 
     public void setColorHash(HashMap<String, String> colorHash) {
         this.colorHash = colorHash;
+    }
+
+    public boolean isFrameLayout() {
+        return isFrameLayout;
+    }
+
+    public void setIsFrameLayout(boolean isFrameLayout) {
+        this.isFrameLayout = isFrameLayout;
+    }
+
+    int deviceType =0;
+    public void setDeviceType(int deviceType)
+    {
+        this.deviceType = deviceType;
+    }
+    public int getDeviceType()
+    {
+        return this.deviceType;
     }
 }

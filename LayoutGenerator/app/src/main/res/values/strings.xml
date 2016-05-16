@@ -15,6 +15,10 @@
         <item>end</item>
         <item>start</item>
         <item>top</item>
+        <item>right|bottom</item>
+        <item>left|bottom</item>
+        <item>top|right</item>
+        <item>top|left</item>
         <item>center_horizontal</item>
         <item>center_vertical</item>
         <item>clip_horizontal</item>
@@ -40,6 +44,7 @@
         <item>Vertical LinearLayout</item>
         <item>Vertically Horizontal LinearLayout</item>
 
+
     </string-array>
 
     <string-array name="weightselector">
@@ -59,12 +64,29 @@
         <item>Purple</item>
         <item>Yellow</item>
         <item>Magenta</item>
-         <item>Orange</item>
+        <item>Orange</item>
         <item>Blue Gray</item>
         <item>Slate Gray</item>
 
     </string-array>
 
+
+    <string-array name="framelayoutgravityselector">
+        <item>left</item>
+        <item>right</item>
+        <item>center</item>
+        <item>bottom</item>
+        <item>end</item>
+        <item>start</item>
+        <item>top</item>
+        <item>center_horizontal</item>
+        <item>center_vertical</item>
+        <item>clip_horizontal</item>
+        <item>clip_horizontal</item>
+        <item>fill_horizontal</item>
+        <item>fill_vertical</item>
+        <item>fill</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

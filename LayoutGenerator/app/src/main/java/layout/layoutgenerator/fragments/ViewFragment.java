@@ -48,6 +48,16 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
     int mContainerId = -1;
     Toolbar mtoolBar;
 
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -98,7 +108,7 @@ public class ViewFragment extends Fragment implements  View.OnClickListener, Ada
     }
 private void checkAndPopulateWithDataForPosition(){
     int position = MobileApplication.getInstance().getWidgetPos();
-    Log.d("ViewFragment","Position::::"+position);
+    Log.d("ViewFragment", "Position::::" + position);
     position = position + 1;
    // Log.d("ViewFragment","Incremented Position::::"+position);
     WidgetPropertiesDTO value = MobileApplication.getInstance().getWidgetInfoMap().get(position);
@@ -188,8 +198,14 @@ private void checkAndPopulateWithDataForPosition(){
         switch (v.getId()){
             case  R.id.finish_btn:
                 createWidgetProperties();
+                String generatedXML = "";
                 try {
-                    String generatedXML = XMLGenerator.getInstance().generateLayoutUsingXMLSerializer();
+                    if(MobileApplication.getInstance().isFrameLayout()) {
+                        generatedXML = XMLGenerator.getInstance().generateFrameLayoutUsingXMLSerializer();
+                    }else{
+                        generatedXML = XMLGenerator.getInstance().generateLayoutUsingXMLSerializer();
+                    }
+
                     Log.d("ViewFragment", "GeneratedXML::::::"+generatedXML);
                     getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(mContainerId,ResultFragment.newInstance(generatedXML,"")).commit();
